@@ -1,109 +1,7 @@
-//============================================================================
-// Name        : OctaneCrawler.cpp
-// Author      : Berlin Brown (berlin dot brown at gmail.com)
-// Version     :
-// Copyright   : Copyright Berlin Brown 2012-2013
-// License     : BSD
-// Description : This is the simplest possible web crawler in C++
-//               Uses boost_regex and boost_algorithm
-//============================================================================
 #include "../wget/crawler.h"
-
-// using namespace std;
-// using namespace boost;
-
 namespace uri = boost::network::uri;
 namespace  fs = boost::filesystem;
 
-
-//class WebPage
-//{
-//public:
-//    std::string  hostname;
-//    std::string  path;
-//
-//    WebPage () : hostname (), path () {}
-//
-//    // std::string&  get_host (const std::string &url)
-//    // {
-//    //     const boost::regex re ("(?i)https?://(?:www\.)?([^/]+)(.*)");
-//    //     boost::smatch what;
-//    //     if ( boost::regex_match (url, what, re))
-//    //     {
-//    //         hostname = what[1];
-//    //         boost::algorithm::to_lower (hostname);
-//    //         return hostname;
-//    //     }
-//    //     hostname = "";
-//    //     return  hostname;
-//    // } // End of method //
-//
-//    void parse_url (const std::string &url, const std::string &orig_host)
-//    {
-//        const boost::regex re ("(?i)https?://(?:www\.)?([^/]+)(.*)");
-//        boost::smatch what;
-//        if ( boost::regex_match (url, what, re))
-//        {
-//            // We found a full URL, parse out the 'hostname'
-//            // Then parse out the page
-//            hostname = what[1];
-//            boost::algorithm::to_lower (hostname);
-//            path = what[2];
-//        }
-//        else
-//        {
-//            // We could not find the 'page' but we can build the hostname
-//            hostname = orig_host;
-//            page = "";
-//        } // End of the if - else //
-//    } // End of method //
-//
-//    void parse (const std::string &url, const std::string &altern_host)
-//    {
-//        const std::string host = parse_url (hrf);
-//        if ( !hst.empty ())
-//        {
-//            // If we have a HTTP prefix
-//            // We could end up with a 'hostname' and page
-//            parseHref (hst, hrf);
-//        } else
-//        {
-//            hostname = orig_host;
-//            page = hrf;
-//        }
-//        // hostname and page are constructed,
-//        // perform post analysis
-//        if ( page.length () == 0 )
-//        {
-//            page = "/";
-//        } // End of the if //
-//    } // End of the method
-//}; // End of the class
-//
-//
-//std::string string_format (const std::string &fmt, ...)
-//{
-//    int size = 255;
-//    std::string str;
-//    va_list ap;
-//    while ( 1 )
-//    {
-//        str.resize (size);
-//        va_start(ap, fmt);
-//        int n = vsnprintf ((char *) str.c_str (), size, fmt.c_str (), ap);
-//        va_end(ap);
-//        if ( n > -1 && n < size )
-//        {
-//            str.resize (n);
-//            return str;
-//        }
-//        if ( n > -1 )
-//            size = n + 1;
-//        else
-//            size *= 2;
-//    } // End of the while //
-//    return str;
-//} // End of the function //
 
 extern "C"
 {
@@ -209,16 +107,13 @@ FREE:;
 std::string  wget::formGetRequest  (IN const uri::uri &url)
 {
     std::string request = "GET ";
-    
     request.append (url.path ());
     request.append (" HTTP/1.1\r\n");
     request.append ("Host: ");
     request.append (url.host ());
     request.append ("\r\n");
     request.append ("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.81\r\n");
-    request.append (
-            "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0;)\r\n");
-    // http://code.google.com/p/octane-crawler/
+    request.append ("User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0;)\r\n");
     request.append ("Connection: close\r\n");
     request.append ("\r\n");
     return request;
