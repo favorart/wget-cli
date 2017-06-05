@@ -1,10 +1,10 @@
 # wget-cli
 The simplest recursive http-downloader.
 
-con_args.h, con_args.cpp  - the parsing of console arguments
-crawler.h, crawler.cpp    - Class wget of the http-downloading
-parse_html.cpp            - the function of the html parsing
-header.h, main.cpp        - the application call
+	* con_args.h, con_args.cpp  - the parsing of console arguments
+	* crawler.h, crawler.cpp    - class wget of downloading web-pages
+	* parse_html.cpp            - the function of the html parsing
+	* header.h, main.cpp        - the application call
 	
 Usage:
 Call wget-cli
