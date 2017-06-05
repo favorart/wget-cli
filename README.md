@@ -1,6 +1,13 @@
 # wget-cli
 The simplest recursive http-downloader.
 
+!Точно успешно скачивает страницы http://python.org и ubuntu.ru!
+
+!Пока без поддержки [.pdf, .txt и пр.], если доделать загрузку
+ через boost::asio, то будет грузить всё на свете, как и должен!
+ 
+!Проверяет только один код ответа 200!
+
 	* con_args.h, con_args.cpp  - the parsing of console arguments
 	* crawler.h, crawler.cpp    - class wget of downloading web-pages
 	* parse_html.cpp            - the function of the html parsing
