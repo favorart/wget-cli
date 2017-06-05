@@ -9,6 +9,7 @@
 
 // #include <cstdarg>
 #include <string>
+#include <vector>
 #include <fstream>
 #include <iostream>
 #include <typeinfo>
@@ -45,9 +46,9 @@ extern "C"
 
 
 const int MAXRECV = (140 * 1024);
-bool  socket_connect_and_receive (const char *host, int port,
-                                  const std::string *request,
-                                  std::string *responce);
+bool  socket_connect_and_receive (IN const char *host, IN int port,
+                                  IN const std::string *request,
+                                  OUT std::string *responce);
 }
 
 
@@ -58,7 +59,7 @@ class wgetException : std::exception
 };
 class wgetConnectErrorException : std::exception
 {};
-class wgetNotSupportException : std::exception
+class wgetNotSupportException   : std::exception
 {};
 
 
@@ -85,16 +86,15 @@ class wget
     bool noParent;
     bool pageRequist;
     
-    hashtableURIs urls;
     hashtableURIs crawled;
 
 public:
-    wget (const std::string &saveDir,
-          int  tries = 1,
-          bool recursive = false,
-          bool noParent = false,
-          bool pageRequist = false,
-          int delay = 12) :
+    wget (IN const std::string &saveDir,
+          IN int  tries = 1,
+          IN bool recursive = false,
+          IN bool noParent = false,
+          IN bool pageRequist = false,
+          IN int delay = 12) :
             saveDir (saveDir), tries (tries), noParent (noParent),
             pageRequist (pageRequist), delay (delay)
     {
@@ -128,26 +128,27 @@ public:
         closelog ();
     }
     
-    void  connect  (const boost::network::uri::uri &url);
-    
-    void fetch (IN  const boost::network::uri::uri &url,
-                IN        int          port,
-                IN  const std::string &request,
-                OUT       std::string &responce);
-    
     void download (IN const boost::network::uri::uri &url,
                    IN       int   port=80,
                    IN const int   depth=1,
                    IN const bool  continueDump=false,
                    IN const bool  verbose=false);
-    
+        
 protected:
+    bool         splitHeader     (IN OUT std::string &responce, IN bool verbose);
     std::string  formGetRequest  (IN const boost::network::uri::uri &url);
     std::string  formOutFileName (IN const boost::network::uri::uri &url);
     void         dumpOutFile     (IN const std::string &filename,
                                   IN const std::string &responce);
-    void         parseHTML       (IN  const std::string &html,
+    void         parseHTML       (IN const std::string &html,
                                   OUT hashtableURIs &urls);
+
+//    bool fetch (IN  const boost::network::uri::uri &url,
+//                IN        int          port,
+//                IN  const std::string &request,
+//                OUT       std::string &responce);
+//
+//    void  connect  (IN const boost::network::uri::uri &url);
 };
 
 #endif // WGET_CLIENT_CRAWLER_H

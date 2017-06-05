@@ -11,6 +11,22 @@ namespace  uri = boost::network::uri;
 namespace   fs = boost::filesystem;
 
 
+void prepareURL (IN OUT std::string &url)
+{
+    std::string delimiter = "://";
+    size_t  len_pref = url.find (delimiter);
+    if (len_pref == std::string::npos)
+        len_pref = 0;
+    else
+        len_pref += delimiter.size ();
+    
+    if ( url.find ("/") == std::string::npos )
+        url += "/";
+    
+    url = "http://" + url.substr (len_pref, url.size () - len_pref);
+}
+
+
 int main (int argc, char **argv)
 {
     appArgs args = {};
@@ -22,6 +38,7 @@ int main (int argc, char **argv)
     
     if ( !args.url.empty () )
     {
+        prepareURL (args.url);
         getter.download (uri::uri (args.url), 80, args.depthLevel,
                          args.continLoad, args.verbose);
         
@@ -31,10 +48,14 @@ int main (int argc, char **argv)
     else if ( !args.inputFile.empty () )
     {
         std::ifstream   f_in (args.inputFile);
-        for (std::string url; getline (f_in, url); )
+        if ( f_in.is_open () )
         {
-            getter.download (uri::uri (url), 80, args.depthLevel,
-                             args.continLoad, args.verbose);
+            for ( std::string url; getline (f_in, url); )
+            {
+                prepareURL (url);
+                getter.download (uri::uri (url), 80, args.depthLevel,
+                                 args.continLoad, args.verbose);
+            }
         }
         if ( args.verbose )
         { std::cout << "Done" << std::endl; }

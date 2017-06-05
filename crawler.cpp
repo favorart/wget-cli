@@ -5,9 +5,9 @@ namespace  fs = boost::filesystem;
 
 extern "C"
 {
-bool  socket_connect_and_receive (const char *host, int port,
-                                  const std::string *request,
-                                  std::string *responce)
+bool  socket_connect_and_receive (IN const char *host, IN int port,
+                                  IN const std::string *request,
+                                  OUT std::string *responce)
 {
     bool result = false;
     
@@ -99,16 +99,18 @@ bool  socket_connect_and_receive (const char *host, int port,
 FREE:;
     close  (m_sock);
     syslog (LOG_INFO, "CONNETCTION CLOSED");
-    return false;
+    return result;
 } // End of the function //
 }
 
-
+// ================================================================
 std::string  wget::formGetRequest  (IN const uri::uri &url)
 {
+    // std::cout << url.host () << ' ' << url.path () << std::endl;
+    
     std::string request = "GET ";
     request.append (url.path ());
-    request.append (" HTTP/1.1\r\n");
+    request.append (" HTTP/1.0\r\n");
     request.append ("Host: ");
     request.append (url.host ());
     request.append ("\r\n");
@@ -139,50 +141,43 @@ void  wget::dumpOutFile (IN const std::string &filename,
     fs::path fn (filename);
     fs::path path = saveDir / fn;
     
-    std::ofstream  outFile (path.c_str ());
+    std::ofstream  outFile (path.c_str (), std::ios::out);
     outFile << responce << std::endl;
     outFile.close ();
 } // End of the function //
 
-void  wget::connect  (const uri::uri &url)
+bool  wget::splitHeader (IN OUT std::string &responce, IN bool verbose)
 {
-    boost::asio::io_service io_service ;
-    boost::asio::ip::tcp::resolver resolver(io_service) ;
+    const boost::regex respRxp ("^(HTTP/1\\.[10]\\s+(\\d+).*?\r\n\r\n).*");
+    boost::smatch xResults;
+    std::string header;
+    int status_code;
     
-    boost::asio::ip::tcp::resolver::query query (url.string (), "http");
-    boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve (query);
-    boost::asio::ip::tcp::resolver::iterator end;
-    boost::asio::ip::tcp::endpoint endpoint;
-    while (iter != end)
+    boost::regex_match (responce,  xResults, respRxp);
+    header = xResults[1];
+    status_code = std::stoi (xResults[2]);
+    
+    if ( verbose )
     {
-        endpoint = *iter++;
-        std::cout << endpoint << std::endl;
+        std::cout << "Header:" << header << std::endl;
+        std::cout << "---------------------------" << std::endl;
     }
-
-    boost::asio::ip::tcp::socket socket(io_service);
-    socket.connect(endpoint);
-
-    boost::asio::streambuf  request;
-    std::ostream  request_stream (&request);
-    request_stream << "GET / HTTP/1.0\r\n";
-    request_stream << "Host: localhost \r\n";
-    request_stream << "Accept: */*\r\n";
-    request_stream << "Connection: close\r\n\r\n";
-
-    boost::asio::write(socket, request);
-
-    boost::asio::streambuf header;
-    boost::asio::read_until (socket, header, "\r\n\r\n");
-
-    // std::cout << &response << std::endl;
     
+    if ( 200 != status_code )
+    {
+        syslog (LOG_ERR, "ERROR not received page, status_code != 200.");
+        return true;
+    }
+    
+    responce = responce.substr (header.size (), responce.size () - header.size ());
+    return false;
 }
 
-void  wget::download (const uri::uri &url,
-                      const int  port,
-                      const int  depth,
-                      const bool continueDump,
-                      const bool verbose)
+void  wget::download (IN const uri::uri &url,
+                      IN const int  port,
+                      IN const int  depth,
+                      IN const bool continueDump,
+                      IN const bool verbose)
 {
     if ( depth > 0 )
     {
@@ -200,12 +195,15 @@ void  wget::download (const uri::uri &url,
         // End of building the request //
         std::string responce;
         const char *host = url.host ().c_str ();
-        
         int status = 0;
         int these_tries = tries;
         do
         {
+            responce = "";
             status = socket_connect_and_receive (host, port, &request, &responce);
+            // status = fetch (url, port, request, responce);
+            if ( !status )
+            { status = splitHeader (responce, verbose); }
         }
         while ( status && --these_tries );
         // { throw wgetException (); }
@@ -214,20 +212,27 @@ void  wget::download (const uri::uri &url,
         
         if ( verbose )
         {
-            std::cout << "Response:" << responce << std::endl;
-            std::cout << "---------------------------" << std::endl;
-            
+            // std::cout << "Response:" << responce << std::endl;
+            // std::cout << "---------------------------" << std::endl;
         }
         
         std::string filename = formOutFileName (url);
         dumpOutFile (filename, responce);
         
         if ( verbose )
-        { std::cout << "Writing to file : " << filename << std::endl; }
+        {
+            std::cout << "Writing to file : " << filename << std::endl;
+            std::cout << "---------------------------" << std::endl;
+        }
         
         if ( recursive && depth > 1 )
         {
-            parseHTML (responce, urls);
+            std::vector<std::string> v_urls;
+            {
+                hashtableURIs urls;
+                parseHTML (responce, urls);
+                v_urls = std::vector<std::string> (begin (urls), end (urls));
+            }
             
             if ( noParent )
             {
@@ -237,11 +242,27 @@ void  wget::download (const uri::uri &url,
                 std::string  parentURLescaped = escape_string (parentURL);
                 boost::regex parentRgx ("^" + parentURLescaped);
     
-                for ( auto it = begin (urls); it != end (urls); )
+                for ( auto it = v_urls.begin (); it != v_urls.end (); )
                 {
                     // std::string  &url = *it;
-                    if ( !boost::regex_match (*it, parentRgx) )
-                    { it = urls.erase (it); } // previously this was something like m_map.erase(it++);
+                    if ( !boost::regex_match (*it, parentRgx) and (*it)[0] != '/' )
+                    {
+                        it = v_urls.erase (it);
+                    }   // previously this was something like m_map.erase(it++)
+                    else if ( (*it)[0] == '/' ) // internal link
+                    {
+                        std::string new_url;
+                        if ( parentURL[parentURL.size () - 1] == '/' )
+                            new_url =  parentURL + (*it).substr (1);
+                        else
+                            new_url =  parentURL + (*it);
+                        // last char is not '/'
+                        if ( new_url[new_url.size () - 1] != '/' )
+                            *it += "/";
+                        
+                        *it = new_url;
+                        ++it;
+                    }
                     else
                     { ++it; }
                 }
@@ -252,17 +273,17 @@ void  wget::download (const uri::uri &url,
                 std::cout << "---------------------------" << std::endl;
                 std::cout << "Serch for urls in html : " << std::endl;
                 
-                for ( auto url : urls )
+                for ( auto url : v_urls )
                     std::cout << url << std::endl;
-                getchar ();
+                
             }
             
-            for ( auto url : urls )
+            for ( auto url : v_urls )
             {
-                if ( crawled.find (url) != crawled.end ())
+                if ( crawled.find (url) == crawled.end ())
                 {
                     sleep (delay);
-                    download (uri::uri (url), depth - 1, delay);
+                    download (uri::uri (url), 80, depth - 1, false, verbose);
                     // crawled.insert (url);
                 }
             }
@@ -270,51 +291,92 @@ void  wget::download (const uri::uri &url,
     } // end if depth
 } // End of the function //
 
-void wget::fetch (IN  const uri::uri     &url,
-                  IN        int           port,
-                  IN  const std::string  &request,
-                  OUT       std::string  &responce)
-{
-    try
-    {
-        boost::asio::ip::tcp::iostream  net_stream (url.string (), "http");
-        net_stream.expires_from_now (boost::posix_time::seconds (60));
-        
-        if ( !net_stream )
-        { throw "Unable to connect: " + net_stream.error ().message (); }
-    
-        syslog (LOG_INFO, "CONNECTED");
-        
-        // ask for the file
-        net_stream << "GET " << url.path () << " HTTP/1.0\r\n";
-        net_stream << "Host: " << url.host () << "\r\n";
-        net_stream << "Accept: */*\r\n";
-        net_stream << "Connection: close\r\n\r\n";
-        
-        // Check that response is OK.
-        std::string   http_version;
-        net_stream >> http_version;
-        
-        unsigned int  status_code;
-        net_stream >> status_code;
-        std::string   status_message;
-        std::getline (net_stream, status_message);
-        
-        if ( !net_stream && http_version.substr (0, 5) != "HTTP/" )
-        { throw "Invalid response\n"; }
-        
-        if (status_code != 200)
-        { throw "Response returned with status code " + status_code; }
-        
-        // Process the response headers, which are terminated by a blank line.
-        std::string header;
-        while (std::getline (net_stream, header) && header != "\r") {}
-        
-        // Write the remaining data to output.
-        std::stringstream ss;
-        ss << net_stream.rdbuf();
-        responce = ss.str();
-    }
-    catch (std::exception& e)
-    { syslog (LOG_ERR, e.what ()); }
-}
+// ================================================================
+//void  wget::connect  (const uri::uri &url)
+//{
+//    boost::asio::io_service io_service ;
+//    boost::asio::ip::tcp::resolver resolver(io_service) ;
+//
+//    boost::asio::ip::tcp::resolver::query query (url.string (), "http");
+//    boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve (query);
+//    boost::asio::ip::tcp::resolver::iterator end;
+//    boost::asio::ip::tcp::endpoint endpoint;
+//    while (iter != end)
+//    {
+//        endpoint = *iter++;
+//        std::cout << endpoint << std::endl;
+//    }
+//
+//    boost::asio::ip::tcp::socket socket(io_service);
+//    socket.connect(endpoint);
+//
+//    boost::asio::streambuf  request;
+//    std::ostream  request_stream (&request);
+//    request_stream << "GET / HTTP/1.0\r\n";
+//    request_stream << "Host: localhost \r\n";
+//    request_stream << "Accept: */*\r\n";
+//    request_stream << "Connection: close\r\n\r\n";
+//
+//    boost::asio::write(socket, request);
+//
+//    boost::asio::streambuf header;
+//    boost::asio::read_until (socket, header, "\r\n\r\n");
+//
+//    // std::cout << &response << std::endl;
+//
+//}
+//
+//bool  wget::fetch (IN  const uri::uri     &url,
+//                   IN        int           port,
+//                   IN  const std::string  &request,
+//                   OUT       std::string  &responce)
+//{
+//    try
+//    {
+//        boost::asio::ip::tcp::iostream  net_stream (url.host (), "http");
+//        net_stream.expires_from_now (boost::posix_time::seconds (60));
+//
+//        if ( !net_stream )
+//        { throw "Unable to connect: " + net_stream.error ().message (); }
+//
+//        syslog (LOG_INFO, "CONNECTED");
+//
+//        // ask for the file
+//        net_stream << "GET " << url.path () << " HTTP/1.0\r\n";
+//        net_stream << "Host: " << url.host () << "\r\n";
+//        net_stream << "Accept: */*\r\n";
+//        net_stream << "Connection: close\r\n\r\n";
+//
+//        // Check that response is OK.
+//        std::string   http_version;
+//        net_stream >> http_version;
+//
+//        unsigned int  status_code;
+//        net_stream >> status_code;
+//
+//        std::string   status_message;
+//        std::getline (net_stream, status_message);
+//
+//        if ( !net_stream && http_version.substr (0, 5) != "HTTP/" )
+//        { throw "Invalid response\n"; }
+//
+//        if (status_code != 200)
+//        { throw "Response returned with status code " + status_code; }
+//
+//        // Process the response headers, which are terminated by a blank line.
+//        std::string header;
+//        while (std::getline (net_stream, header) && header != "\r") {}
+//
+//        // Write the remaining data to output.
+//        std::stringstream ss;
+//        ss << net_stream.rdbuf();
+//        responce = ss.str();
+//    }
+//    catch (std::exception& e)
+//    {
+//        std::cout << e.what () << std::endl;
+//        // syslog (LOG_ERR, e.what ());
+//        return true;
+//    }
+//    return false;
+//}
