@@ -128,10 +128,10 @@ std::string  wget::formOutFileName (IN const uri::uri &url)
     filename = boost::regex_replace (url.host () + url.path (), rmv_all, "_");
     
     if ( boost::starts_with (filename, "_"))
-        filename = filename.substr (1, filename.size ());
+        filename = filename.substr (1, filename.size () - 1);
     
     if ( boost::ends_with (filename, "_"))
-        filename = filename.substr (0, filename.size () - 1);
+        filename = filename.substr (0, filename.size () - 2);
     return  filename;
 } // End of the function //
 
@@ -139,7 +139,7 @@ void  wget::dumpOutFile (IN const std::string &filename,
                          IN const std::string &responce)
 {
     fs::path fn (filename);
-    fs::path path = saveDir / fn;
+    fs::path path = saveDir / fn;  // paths concat
     
     std::ofstream  outFile (path.c_str (), std::ios::out);
     outFile << responce << std::endl;
