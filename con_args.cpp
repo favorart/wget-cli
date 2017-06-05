@@ -10,15 +10,18 @@
 void  parseConsoleArguments (IN int argc, IN char **argv, OUT appArgs &args)
 {
     const char *help_text =
-            "\n console call:  wget-cli <url>                                 \n"
-            "\t-l  (--level=<depth>)                                          \n"
-            "\t-t  (--tries=<tries>)                                          \n"
-            "\t-r  (--recursive)                                              \n"
-            "\t-n  (--no-parent)        не выше данного адреса                \n"
-            "\t-i  (--input-file=<fn>)  файл со ссылками                      \n"
-            "\t-s  (--save-dir=<dir>)   каталог, куда сохранять файлы         \n"
-            "\t-c  (--continue)         для продолжения оборвавшегося         \n"
-            "\t-p  (--page-requisites)  ресурсы со страницы (css и картинки)  \n";
+            "\n Call:  wget-cli                                                             \n"
+            "\t-u  (--url=<url>)       = the http-address to download web-page              \n"
+            "\t-l  (--level=<depth>)   = the depth level of recursive downloading the site  \n"
+            "\t-t  (--tries=<tries>)   = number of tries to load a page, if error exists    \n"
+            "\t-r  (--recursive)       = load pages by links found in the download pages    \n"
+            "\t-n  (--no-parent)       = load pages of address not higher then given one    \n"
+            "\t-i  (--input-file=<fn>) = path to input text file with list of http-links    \n"
+            "\t-s  (--save-dir=<dir>)  = path to dir, where to save the html-pages          \n"
+            "\t-c  (--continue)        = continue an interrupted loading    (!not-realized) \n"
+            "\t-p  (--page-requisites) = load page resourses (css and pics) (!not-realized) \n"
+            "\t-v  (--verbose)         = print to stdout the steps of loading process       \n"
+            "\t-h  (--help)            = show the usage (the console args)                  \n";
     
     const char *args_pattern = "u:l:t:rni:s:cpvh?";
     static struct option long_options[] =
