@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(DCMAKE_CXX_FLAGS -std=c++11)
 
 set(SOURCE_FILES wget/header.h        wget/crawler.cpp   wget/crawler.h   wget/main.cpp
-                 wget/parse_html.cpp  wget/con_args.cpp  wget/con_args.h  )
+                 wget/parse_html.cpp  wget/con_args.cpp  wget/con_args.h  wget/urls.cpp wget/sockets.cpp)
 add_executable(wget_client ${SOURCE_FILES})
 
 find_package ( cppnetlib 0.11.0 REQUIRED )

@@ -1,0 +1,731 @@
+/home/favorart/CLionProjects/wget-client/cmake-build-debug/wget_client --input-file sites.txt --verbose -l 2 -s /home/favorart/data -t 2 --no-parent -r
+Launching program
+Request: GET / HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: phpclub.ru
+
+Connection: close
+
+
+
+
+=========================
+Host: phpclub.ru
+IP: 80.87.200.214
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 301 Moved Permanently
+
+Server: nginx/1.11.13
+
+Date: Fri, 09 Jun 2017 22:59:33 GMT
+
+Content-Type: text/html
+
+Content-Length: 186
+
+Connection: close
+
+Location: http://phpclub.ru/talk/
+
+
+
+
+---------------------------
+Request: GET /talk/ HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: phpclub.ru
+
+Connection: close
+
+
+
+
+=========================
+Host: phpclub.ru
+IP: 80.87.200.214
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 301 Moved Permanently
+
+Server: nginx/1.11.13
+
+Date: Fri, 09 Jun 2017 22:59:33 GMT
+
+Content-Type: text/html
+
+Content-Length: 186
+
+Connection: close
+
+Location: https://phpclub.ru/talk/
+
+
+
+
+---------------------------
+Request: GET / HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 301 Moved Permanently
+
+Date: Fri, 09 Jun 2017 22:59:26 GMT
+
+Server: Apache
+
+Location: http://en.cppreference.com/w/
+
+Cache-Control: max-age=2592000
+
+Expires: Sun, 09 Jul 2017 22:59:26 GMT
+
+Content-Length: 237
+
+Connection: close
+
+Content-Type: text/html; charset=iso-8859-1
+
+
+
+
+---------------------------
+Request: GET /w/ HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 200 OK
+
+Date: Fri, 09 Jun 2017 22:59:26 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Content-Language: en
+
+Last-Modified: Thu, 18 May 2017 08:52:09 GMT
+
+Connection: close
+
+Transfer-Encoding: chunked
+
+Content-Type: text/html; charset=UTF-8
+
+
+
+
+---------------------------
+Writing to file : en_cppreference_com_w
+---------------------------
+Search for urls in html : 
+http://en.cppreference.com//www.mediawiki.org/
+http://en.cppreference.com/w/cppreference:general_disclaimer
+http://en.cppreference.com/w/cppreference:privacy_policy
+http://en.cppreference.com/mwiki/index.php?title=main_page&printable=yes
+http://en.cppreference.com/w/special:specialpages
+http://en.cppreference.com/w/special:whatlinkshere/main_page
+http://en.cppreference.com/w/special:recentchanges
+http://en.cppreference.com/w/c/links/libs
+http://en.cppreference.com/w/c/links
+http://en.cppreference.com/w/c/experimental/fpext4
+http://en.cppreference.com/w/c/experimental/fpext1
+http://en.cppreference.com/w/c/experimental/dynamic
+http://en.cppreference.com/w/c/atomic
+http://en.cppreference.com/w/c/locale
+http://en.cppreference.com/mwiki/index.php?title=main_page&�fcamp;action=info
+http://en.cppreference.com/w/c/numeric/random
+http://en.cppreference.com/w/c/numeric/fenv
+http://en.cppreference.com/w/c/algorithm
+http://en.cppreference.com/w/c/string/multibyte
+http://en.cppreference.com/w/c/string
+http://en.cppreference.com/w/c/program
+http://en.cppreference.com/w/c/error
+http://en.cppreference.com/w/c/memory
+http://en.cppreference.com/w/c/numeric/tgmath
+http://en.cppreference.com/w/c/header
+http://en.cppreference.com/w/c/preprocessor
+http://en.cppreference.com/w/c/language/ascii
+http://en.cppreference.com/w/c
+http://en.cppreference.com/w/cpp/symbol_index
+http://en.cppreference.com/w/cpp/index
+http://en.cppreference.com/w/cpp/links/libs
+http://en.cppreference.com/w/cpp/links
+http://en.cppreference.com/mwiki/index.php?title=main_page&oldid=92165
+http://en.cppreference.com/w/c/string/byte
+http://en.cppreference.com/w/cpp/experimental/ranges
+http://en.cppreference.com/w/cpp/language/constraints
+http://en.cppreference.com/w/cppreference:about
+http://en.cppreference.com/w/cpp/container/list
+http://en.cppreference.com/
+http://en.cppreference.com/w/cpp/container/map
+http://en.cppreference.com/w/c/types
+http://en.cppreference.com/w/cpp/container/deque
+http://en.cppreference.com/w/cpp/thread
+http://en.cppreference.com/w/cpp/string/multibyte
+http://en.cppreference.com/w/cpp/container
+http://en.cppreference.com/w/cpp/string/byte
+http://en.cppreference.com/w/cpp/language/ascii
+http://en.cppreference.com/w/cpp/utility/variant
+http://en.cppreference.com/w/c/chrono
+http://en.cppreference.com/w/main_page
+http://en.cppreference.com/w/cpp/filesystem
+http://en.cppreference.com/w/c/keyword
+http://en.cppreference.com/w/c/language
+http://en.cppreference.com/w/cpp/utility/optional
+http://en.cppreference.com/w/cpp/container/forward_list
+http://en.cppreference.com/w/cpp/utility/integer_sequence
+http://en.cppreference.com/w/cpp/container/vector
+http://en.cppreference.com/w/cpp/utility/program
+http://en.cppreference.com/w/cpp/utility/bitset
+http://en.cppreference.com/w/cpp/error
+http://en.cppreference.com/w/cpp/concept
+http://en.cppreference.com/w/cpp/experimental/ostream_joiner
+http://en.cppreference.com/w/cpp/utility
+http://en.cppreference.com/w/c/io
+http://en.cppreference.com/w/cpp/experimental/lib_extensions
+http://en.cppreference.com/w/cpp/utility/functional
+http://en.cppreference.com/w/cpp/experimental/concurrency
+http://en.cppreference.com/w/c/numeric/complex
+http://en.cppreference.com/w/cpp/container/set
+http://en.cppreference.com/w/c/language/escape
+http://en.cppreference.com/w/cpp/experimental/lib_extensions_2
+http://en.cppreference.com/w/cpp/header
+http://en.cppreference.com/mwiki/index.php?title=special:userlogin&returnto=main+page
+http://en.cppreference.com/w/cpp/string
+http://en.cppreference.com/w/cpp/io/basic_ofstream
+http://en.cppreference.com/w/talk:main_page
+http://en.cppreference.com/w/cpp/language
+http://en.cppreference.com/w/cppreference:archives
+http://en.cppreference.com/w/cpp/preprocessor
+http://en.cppreference.com/w/cpp/container/unordered_map
+http://en.cppreference.com/w/cpp/language/operator_precedence
+http://en.cppreference.com/w/cpp/io
+http://en.cppreference.com/w/cpp/memory
+http://en.cppreference.com/w/cpp/language/escape
+http://en.cppreference.com/w/cpp/string/basic_string
+http://en.cppreference.com/w/cpp/utility/any
+http://en.cppreference.com/mwiki/index.php?title=special:userlogin&returnto=main+page&type=signup
+http://en.cppreference.com/w/cpp/compiler_support
+http://en.cppreference.com/w/cpp/container/array
+http://en.cppreference.com/w/cpp/numeric
+http://en.cppreference.com/w/cpp/io/basic_istream
+http://en.cppreference.com/w/cpp/io/basic_ios
+http://en.cppreference.com/w/cpp/chrono
+http://en.cppreference.com/w/cpp/language/types
+http://en.cppreference.com/w/cpp/utility/pair
+http://en.cppreference.com/w/cpp/language/transactional_memory
+http://en.cppreference.com/mwiki/index.php?title=main_page&action=history
+http://en.cppreference.com/w/cpp/types
+http://en.cppreference.com/w/cpp/regex
+http://en.cppreference.com/mwiki/index.php?title=main_page&action=edit
+http://en.cppreference.com/w/cpp/container/multiset
+http://en.cppreference.com/w/cpp/algorithm
+http://en.cppreference.com/w/cpp/container/multimap
+http://en.cppreference.com/w/cpp/container/unordered_multiset
+http://en.cppreference.com/w/cppreference:faq
+http://en.cppreference.com/w/c/experimental
+http://en.cppreference.com/w/c/thread
+http://en.cppreference.com/w/c/string/wide
+http://en.cppreference.com/w/cpp/container/queue
+http://en.cppreference.com/w/cpp/io/c
+http://en.cppreference.com/w/c/numeric
+http://en.cppreference.com/w/cpp/container/unordered_multimap
+http://en.cppreference.com/w/cpp/container/stack
+http://en.cppreference.com/w/cpp/container/priority_queue
+http://en.cppreference.com/w/cpp/numeric/special_math
+http://en.cppreference.com/w/c/numeric/math
+http://en.cppreference.com/w/cpp/iterator
+http://en.cppreference.com/w/cpp/numeric/math
+http://en.cppreference.com/w/cpp/numeric/complex
+http://en.cppreference.com/w/cpp/container/unordered_set
+http://en.cppreference.com/w/cpp/numeric/random
+http://en.cppreference.com/w/c�fcpp/io/basic_streambuf
+http://en.cppreference.com/w/cpp/string/wide
+http://en.cppreference.com/w/cpp/string/basic_string_view
+http://en.cppreference.com/w/cpp/io/basic_iostream
+http://en.cppreference.com/w/cpp/utility/tuple
+http://en.cppreference.com/w/cpp/io/basic_filebuf
+http://en.cppreference.com/w/cpp/io/basic_stringbuf
+http://en.cppreference.com/w/cpp/io/ios_base
+http://en.cppreference.com/w/cpp/experimental/source_location
+http://en.cppreference.com/w/cpp/io/basic_istringstream
+http://en.cppreference.com/w/cpp/io/basic_ostream
+http://en.cppreference.com/w/cpp/io/basic_ifstream
+http://en.cppreference.com/w/cpp/io/basic_fstream
+http://en.cppreference.com/w/special:recentchangeslinked/main_page
+http://en.cppreference.com/w/cpp/experimental
+http://en.cppreference.com/w/cpp/io/basic_ostringstream
+http://en.cppreference.com/w/c/variadic
+http://en.cppreference.com/w/cpp/io/basic_stringstream
+http://en.cppreference.com/w/cpp/io/manip
+http://en.cppreference.com/w/cpp/locale
+http://en.cppreference.com/w/cpp/atomic
+http://en.cppreference.com/w/cpp/experimental/observer_ptr
+http://en.cppreference.com/w/cpp/experimental/propagate_const
+http://en.cppreference.com/w/cpp/experimental/not_fn
+http://en.cppreference.com/w/cpp/experimental/is_detected
+http://en.cppreference.com/w/cpp/keyword
+http://en.cppreference.com/w/cpp/experimental/lib_extensions_2#uniform_container_erasure
+http://en.cppreference.com/w/cpp
+http://en.cppreference.com/w/cpp/experimental/parallelism
+---------------------------
+Request: GET //www.mediawiki.org/ HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 404 Not Found
+
+Date: Fri, 09 Jun 2017 23:00:14 GMT
+
+Server: Apache
+
+Accept-Ranges: bytes
+
+Connection: close
+
+Transfer-Encoding: chunked
+
+Content-Type: text/html; charset=iso-8859-1
+
+
+
+
+---------------------------
+Request: GET /w/cppreference:general_disclaimer HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 301 Moved Permanently
+
+Date: Fri, 09 Jun 2017 23:00:14 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Last-Modified: Fri, 09 Jun 2017 23:00:14 GMT
+
+Location: http://en.cppreference.com/w/Cppreference:general_disclaimer
+
+Content-Length: 0
+
+Connection: close
+
+Content-Type: text/html; charset=utf-8
+
+
+
+
+---------------------------
+Request: GET /w/Cppreference:general_disclaimer HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 404 Not Found
+
+Date: Fri, 09 Jun 2017 23:00:15 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Content-language: en
+
+ETag: W/"mwiki1-mwiki_en_:pcache:idhash:0-0!1!0!!en!2--19700101000000"
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Connection: close
+
+Transfer-Encoding: chunked
+
+Content-Type: text/html; charset=UTF-8
+
+
+
+
+---------------------------
+Request: GET /w/cppreference:privacy_policy HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 301 Moved Permanently
+
+Date: Fri, 09 Jun 2017 23:00:15 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Last-Modified: Fri, 09 Jun 2017 23:00:15 GMT
+
+Location: http://en.cppreference.com/w/Cppreference:privacy_policy
+
+Content-Length: 0
+
+Connection: close
+
+Content-Type: text/html; charset=utf-8
+
+
+
+
+---------------------------
+Request: GET /w/Cppreference:privacy_policy HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 404 Not Found
+
+Date: Fri, 09 Jun 2017 23:00:15 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Content-language: en
+
+ETag: W/"mwiki1-mwiki_en_:pcache:idhash:0-0!1!0!!en!2--19700101000000"
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Connection: close
+
+Transfer-Encoding: chunked
+
+Content-Type: text/html; charset=UTF-8
+
+
+
+
+---------------------------
+Request: GET /mwiki/index.php?title=main_page&printable=yes HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 404 Not Found
+
+Date: Fri, 09 Jun 2017 23:00:16 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Content-language: en
+
+ETag: W/"mwiki1-mwiki_en_:pcache:idhash:0-0!1!0!!en!2!edit=0!printable=1--19700101000000"
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Connection: close
+
+Transfer-Encoding: chunked
+
+Content-Type: text/html; charset=UTF-8
+
+
+
+
+---------------------------
+Request: GET /w/special:specialpages HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 301 Moved Permanently
+
+Date: Fri, 09 Jun 2017 23:00:16 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Last-Modified: Fri, 09 Jun 2017 23:00:16 GMT
+
+Location: http://en.cppreference.com/w/Special:SpecialPages
+
+Content-Length: 0
+
+Connection: close
+
+Content-Type: text/html; charset=utf-8
+
+
+
+
+---------------------------
+Request: GET /w/Special:SpecialPages HTTP/1.1
+
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+
+Accept: text/html, text/xml
+
+Accept-Language: en-us, ru-ru
+
+Host: en.cppreference.com
+
+Connection: close
+
+
+
+
+=========================
+Host: en.cppreference.com
+IP: 74.114.88.139
+Socket is created
+Connected
+Request has been sended
+Responce has been received
+
+Header:HTTP/1.1 200 OK
+
+Date: Fri, 09 Jun 2017 23:00:17 GMT
+
+Server: Apache
+
+X-Content-Type-Options: nosniff
+
+Content-language: en
+
+Vary: Accept-Encoding,Cookie
+
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+
+Cache-Control: private, must-revalidate, max-age=0
+
+Connection: close
+
+Transfer-Encoding: chunked
+
+Content-Type: text/html; charset=UTF-8
+
+
+
+
+---------------------------
+

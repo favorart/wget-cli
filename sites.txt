@@ -1,0 +1,9 @@
+http://phpclub.ru
+http://en.cppreference.com
+ubuntu.ru
+python.org
+http://statusorel.ru/technology/setup-of-google-sync-plugin-for-keepass-v-2-x.html
+http://www.math.msu.su/sites/default/files/poryadok_provedeniya_promezhutochnoy_attestacii_1.pdf#overlay-context=postgraduate_course
+http://keepass.info/help/v2_dev/scr_sc_index.html
+http://help.ubuntu.ru/wiki/samba
+

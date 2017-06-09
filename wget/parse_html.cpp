@@ -1,9 +1,10 @@
-#include "../wget/crawler.h"
 #include <gumbo.h>
+#include "header.h"
+#include "crawler.h"
 
 
-static void  searchForLinksInHTML (IN GumboNode* node,
-                                   OUT std::unordered_set<std::string> &urls)
+static void  searchForLinksInHTML (IN  GumboNode     *node,
+                                   OUT hashTableURLs &urls)
 {
     if ( node->type != GUMBO_NODE_ELEMENT )
     { return; }
@@ -13,7 +14,7 @@ static void  searchForLinksInHTML (IN GumboNode* node,
          (href = gumbo_get_attribute (&node->v.element.attributes, "href")))
     {
         std::string  url = std::string (href->value);
-        boost::algorithm::to_lower (url);
+        lower_case (url);
         urls.insert (url);
         // std::cout << href->value << std::endl;
     }
@@ -24,7 +25,7 @@ static void  searchForLinksInHTML (IN GumboNode* node,
 }
 
 void  wget::parseHTML (IN  const std::string &html,
-                       OUT std::unordered_set<std::string> &urls)
+                       OUT hashTableURLs     &urls)
 {
     GumboOutput *output = gumbo_parse (html.c_str ());
     searchForLinksInHTML (output->root, urls);
