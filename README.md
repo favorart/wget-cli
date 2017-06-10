@@ -1,12 +1,16 @@
 # wget-cli
 The simplest recursive http-downloader.
 
-!Точно успешно скачивает страницы http://python.org и ubuntu.ru!
+0. sites.txt = urls the app was started on 
+1. GET (txt) = request tested by "nc -q 3 mail.ru 80 < GET"
+2. wget-cli (.exe) = successful compiled version.
+3. start.sh = example how may run the app
+4. log.txt = console dump of start.sh
+5. Makefile = manually created file (to be sure)
+6. CMakeLists.txt = automatic created file by CLion (not exactly understand how it works)
 
-!Пока без поддержки [.pdf, .txt и пр.], если доделать загрузку
- через boost::asio, то будет грузить всё на свете, как и должен!
- 
-!Проверяет только один код ответа 200!
+There is no support file types [.pdf,.txt,.xml,.pic,.jpg,.zip etc]
+Check only status code 200 (301 a little)
 
 	* con_args.h, con_args.cpp  - the parsing of console arguments
 	* crawler.h, crawler.cpp    - class wget of downloading web-pages
